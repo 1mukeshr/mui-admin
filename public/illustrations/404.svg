@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none" role="img" aria-hidden="true">
+  <rect width="320" height="220" rx="24" fill="url(#g404)"/>
+  <circle cx="250" cy="48" r="28" fill="#2dd4bf" opacity=".22"/>
+  <circle cx="62" cy="172" r="36" fill="#0d9488" opacity=".12"/>
+  <path d="M78 148c18-42 48-66 82-66s64 24 82 66" stroke="#0d9488" stroke-width="8" stroke-linecap="round" opacity=".35"/>
+  <rect x="118" y="58" width="84" height="104" rx="16" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+  <path d="M146 98h28M140 118h40M148 138h24" stroke="#92a4ab" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="160" cy="78" r="10" fill="#0d9488"/>
+  <path d="M96 72l14 14M110 72l-14 14" stroke="#e11d48" stroke-width="5" stroke-linecap="round"/>
+  <text x="160" y="198" text-anchor="middle" font-family="Outfit,Segoe UI,sans-serif" font-size="28" font-weight="600" fill="#0d9488">404</text>
+  <defs>
+    <linearGradient id="g404" x1="40" y1="0" x2="280" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e6f7f5"/>
+      <stop offset="1" stop-color="#eef2f4"/>
+    </linearGradient>
+  </defs>
+</svg>

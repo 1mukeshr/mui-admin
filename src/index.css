@@ -1,0 +1,130 @@
+@import './styles/common.css';
+@import './styles/layout.css';
+@import './styles/pages.css';
+
+:root {
+  --theme-primary: #0d9488;
+  --theme-primary-light: #2dd4bf;
+  --theme-primary-dark: #0f766e;
+  --theme-secondary: #38bdf8;
+  --theme-bg: #eef2f4;
+  --theme-paper: #ffffff;
+  --theme-text: #102027;
+  --theme-muted: #5b6b73;
+  --theme-divider: rgba(16, 32, 39, 0.08);
+  --theme-hover: rgba(16, 32, 39, 0.045);
+  --theme-success: #059669;
+  --theme-error: #e11d48;
+  --theme-warning: #d97706;
+  --sidebar-width: 256px;
+  --header-height: 64px;
+  --header-offset: 64px;
+  --font-ui: "Outfit", sans-serif;
+  --radius-card: 12px;
+}
+
+html[data-menu='collapsed'] {
+  --sidebar-width: 80px;
+}
+
+html[data-menu='horizontal'] {
+  --sidebar-width: 0px;
+}
+
+@media (min-width: 900px) {
+  html[data-menu='horizontal']:not([data-navbar='static']) {
+    --header-offset: 112px;
+  }
+
+  html[data-menu='horizontal'][data-navbar='hidden'] {
+    --header-offset: 56px;
+  }
+}
+
+html[data-navbar='static'] {
+  --header-offset: 0px;
+}
+
+html[data-navbar='hidden'] {
+  --header-offset: 56px;
+}
+
+html[data-theme='dark'] {
+  --theme-success: #34d399;
+  --theme-error: #fb7185;
+  --theme-warning: #fbbf24;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+#root {
+  font-family: var(--font-ui);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--theme-primary) 24%, transparent);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  font-family: inherit;
+}
+
+strong,
+b {
+  font-weight: 500;
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-menu="vertical" data-navbar="sticky">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>MUI Admin</title>
+    <style>
+      html, body { background: #eef2f4; font-family: "Outfit", sans-serif; }
+      html[data-theme='dark'], html[data-theme='dark'] body { background: #0a1214; }
+    </style>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('mui-admin:customizer');
+          var state = raw ? JSON.parse(raw) : {};
+          var pref = state.preference || 'light';
+          var mode =
+            pref === 'system'
+              ? window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+              : pref;
+          var root = document.documentElement;
+          root.dataset.theme = mode;
+          var menu = state.menu || 'vertical';
+          if (menu === 'horizontal') menu = 'vertical';
+          root.dataset.menu = menu;
+          root.dataset.navbar = state.navbar || 'sticky';
+          root.dataset.content = state.contentWidth || 'full';
+          root.dataset.skin = state.skin || 'default';
+          root.dataset.semidark = state.semiDark ? 'true' : 'false';
+          root.style.colorScheme = mode;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

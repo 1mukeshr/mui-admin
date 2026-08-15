@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" fill="none" role="img" aria-hidden="true">
+  <rect width="320" height="220" rx="24" fill="url(#g500)"/>
+  <ellipse cx="160" cy="150" rx="88" ry="18" fill="#0d9488" opacity=".1"/>
+  <rect x="96" y="58" width="128" height="92" rx="16" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+  <path d="M120 92h80M120 112h52" stroke="#92a4ab" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="214" cy="70" r="22" fill="#e11d48"/>
+  <path d="M214 60v14M214 82v2" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64 168c24-20 56-20 80 0s56 20 80 0 56-20 80 0" stroke="#0d9488" stroke-width="4" opacity=".25" stroke-linecap="round"/>
+  <text x="160" y="198" text-anchor="middle" font-family="Outfit,Segoe UI,sans-serif" font-size="28" font-weight="600" fill="#0d9488">500</text>
+  <defs>
+    <linearGradient id="g500" x1="0" y1="0" x2="320" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fde8ee"/>
+      <stop offset="1" stop-color="#eef2f4"/>
+    </linearGradient>
+  </defs>
+</svg>
