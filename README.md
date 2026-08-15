@@ -5,7 +5,7 @@ MUI-based operations console for users, catalog, orders, and reports — built a
 **Author:** Mukesh Rawat · showcase / interview project
 
 > **GitHub:** https://github.com/1mukeshr/mui-admin  
-> **Live demo:** https://mui-admin-seven.vercel.app
+> **Live demo:** https://mui-admin-mukesh.vercel.app
 
 ## Why this project
 
