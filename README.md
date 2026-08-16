@@ -4,7 +4,7 @@ Tejas MUI is a Material UI operations console for users, catalog, orders, and re
 
 **Author:** Mukesh Rawat · showcase / interview project
 
-> **GitHub:** https://github.com/1mukeshr/mui-admin  
+> **GitHub:** https://github.com/1mukeshr/tejas-mui  
 > **Live demo:** https://mui-admin-mukesh.vercel.app
 
 ## Why this project

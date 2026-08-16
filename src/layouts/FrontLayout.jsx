@@ -51,7 +51,7 @@ const FOOTER_GROUPS = [
       { label: 'Payment demo', to: '/front/payment' },
       { label: 'Sign in', to: '/login' },
       { label: 'Create account', to: '/register' },
-      { label: 'GitHub', to: 'https://github.com/1mukeshr/mui-admin' },
+      { label: 'GitHub', to: 'https://github.com/1mukeshr/tejas-mui' },
       { label: 'Live demo', to: 'https://mui-admin-mukesh.vercel.app' },
     ],
   },
