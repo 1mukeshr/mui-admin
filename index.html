@@ -18,7 +18,7 @@
     <script>
       (function () {
         try {
-          var raw = localStorage.getItem('mui-admin:customizer');
+          var raw = localStorage.getItem('tejas-mui:customizer') || localStorage.getItem('mui-admin:customizer');
           var state = raw ? JSON.parse(raw) : {};
           var pref = state.preference || 'light';
           var mode =

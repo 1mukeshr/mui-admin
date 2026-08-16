@@ -47,8 +47,8 @@ export function CommandPalette() {
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
-    window.addEventListener('mui-admin:open-command-palette', onOpen);
-    return () => window.removeEventListener('mui-admin:open-command-palette', onOpen);
+    window.addEventListener('tejas-mui:open-command-palette', onOpen);
+    return () => window.removeEventListener('tejas-mui:open-command-palette', onOpen);
   }, []);
 
   const run = (item) => {
@@ -155,5 +155,5 @@ export function CommandPalette() {
 }
 
 export function openCommandPalette() {
-  window.dispatchEvent(new Event('mui-admin:open-command-palette'));
+  window.dispatchEvent(new Event('tejas-mui:open-command-palette'));
 }

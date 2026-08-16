@@ -52,7 +52,7 @@ const FOOTER_GROUPS = [
       { label: 'Sign in', to: '/login' },
       { label: 'Create account', to: '/register' },
       { label: 'GitHub', to: 'https://github.com/1mukeshr/tejas-mui' },
-      { label: 'Live demo', to: 'https://mui-admin-mukesh.vercel.app' },
+      { label: 'Live demo', to: 'https://tejas-mui.vercel.app' },
     ],
   },
 ];
