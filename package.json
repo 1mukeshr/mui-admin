@@ -3,6 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://tejas-mui.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1mukeshr/tejas-mui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/1mukeshr/tejas-mui/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
