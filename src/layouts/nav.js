@@ -20,6 +20,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import InterestsOutlinedIcon from '@mui/icons-material/InterestsOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import WebStoriesOutlinedIcon from '@mui/icons-material/WebStoriesOutlined';
+import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 
 export const NAV_GROUPS = [
   {
@@ -203,9 +204,26 @@ export const NAV_GROUPS = [
     label: 'FAQ',
     icon: QuizOutlinedIcon,
     children: [
-      { label: 'Accordion', to: '/pages/faq/accordion' },
-      { label: 'Categories', to: '/pages/faq/categories' },
-      { label: 'Search', to: '/pages/faq/search' },
+      { label: 'Basic', to: '/pages/faq/basic' },
+      { label: 'Separated', to: '/pages/faq/separated' },
+      { label: 'Filled', to: '/pages/faq/filled' },
+      { label: 'Accent', to: '/pages/faq/accent' },
+    ],
+  },
+  {
+    id: 'components',
+    label: 'Components',
+    icon: WidgetsOutlinedIcon,
+    children: [
+      { label: 'Buttons', to: '/pages/components/buttons' },
+      { label: 'Cards', to: '/pages/components/cards' },
+      { label: 'Forms', to: '/pages/components/forms' },
+      { label: 'Dialogs', to: '/pages/components/dialogs' },
+      { label: 'Tables', to: '/pages/components/tables' },
+      { label: 'Tabs', to: '/pages/components/tabs' },
+      { label: 'Alerts', to: '/pages/components/alerts' },
+      { label: 'Chips', to: '/pages/components/chips' },
+      { label: 'Avatars', to: '/pages/components/avatars' },
     ],
   },
   {

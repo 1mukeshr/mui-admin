@@ -2,7 +2,7 @@ import { Alert, Button, Card, CardContent, Stack, Step, StepLabel, Stepper, Tab,
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 
 const TABS = [
   { id: 'numbered', label: 'Numbered' },
@@ -18,7 +18,7 @@ export function FormWizard() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     password: 'Admin@123',
     name: OWNER_NAME,
     phone: CONTACT_PHONE,

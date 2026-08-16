@@ -1,13 +1,13 @@
 import { Alert, Button, Card, CardContent, Grid, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { PageHeader } from '../../components/common/PageHeader';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 import { formatCurrency } from '../../utils/format';
 
 export function FormValidation() {
   const [form, setForm] = useState({
     name: OWNER_NAME,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     phone: CONTACT_PHONE,
     password: '',
     confirm: '',

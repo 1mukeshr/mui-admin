@@ -18,7 +18,8 @@ import {
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
-import { CONTACT_PHONE } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL } from '../../data/seed';
+import { BRAND_FULL } from '../../data/brand';
 import { useAuth } from '../../contexts/AuthContext';
 import { useThemeMode } from '../../contexts/ThemeModeContext';
 import { loadState, saveState } from '../../utils/storage';
@@ -51,7 +52,7 @@ export function Settings() {
         email: user?.email ?? '',
         phone: user?.phone ?? CONTACT_PHONE,
         department: user?.department ?? '',
-        bio: stored.profile.bio || (user?.email === 'admin@demo.com' ? 'Workspace owner for MUI Admin.' : ''),
+        bio: stored.profile.bio || (user?.email === OWNER_EMAIL ? `Workspace owner for ${BRAND_FULL}.` : ''),
       },
       appearance: { ...stored.appearance, mode: preference },
       general: { ...stored.general, currency: 'INR' },

@@ -2,7 +2,7 @@ import { Button, Card, CardContent, Grid, Stack, Tab, Tabs, TextField } from '@m
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 
 const TABS = [
   { id: 'vertical', label: 'Vertical' },
@@ -17,9 +17,9 @@ export function FormLayouts() {
   const tab = Math.max(0, TABS.findIndex((item) => item.id === type));
   const [form, setForm] = useState({
     name: OWNER_NAME,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     phone: CONTACT_PHONE,
-    company: 'MUI Admin',
+    company: 'Tejas MUI',
     city: 'Jaipur',
     country: 'India',
     bio: 'Operations workspace for users, catalog, and orders.',

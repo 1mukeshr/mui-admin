@@ -88,7 +88,7 @@ export function buildTheme(
       MuiButton: {
         defaultProps: { disableElevation: true },
         styleOverrides: {
-          root: { borderRadius: 6, paddingInline: 16, minHeight: 36 },
+          root: { borderRadius: 7, paddingInline: 16, minHeight: 36 },
           containedPrimary: {
             color: '#fff',
             backgroundColor: primary,
@@ -105,6 +105,7 @@ export function buildTheme(
       MuiIconButton: {
         styleOverrides: {
           root: {
+            borderRadius: 7,
             color: textSecondary,
             '&:hover': { backgroundColor: isLight ? 'rgba(15, 23, 42, 0.06)' : 'rgba(232, 238, 252, 0.08)' },
           },
@@ -133,7 +134,7 @@ export function buildTheme(
       },
       MuiToolbar: {
         styleOverrides: {
-          regular: { minHeight: 72, '@media (min-width: 600px)': { minHeight: 72 } },
+          regular: { minHeight: 64, '@media (min-width: 600px)': { minHeight: 64 } },
         },
       },
       MuiCardContent: {
@@ -151,7 +152,7 @@ export function buildTheme(
       },
       MuiAlert: {
         styleOverrides: {
-          root: { borderRadius: 8 },
+          root: { borderRadius: 10 },
         },
       },
       MuiFormControlLabel: {
@@ -231,7 +232,7 @@ export function buildTheme(
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            borderRadius: 6,
+            borderRadius: 8,
             marginInline: 4,
             '&:hover': { backgroundColor: alpha(primary, isLight ? 0.06 : 0.12) },
           },
@@ -250,7 +251,7 @@ export function buildTheme(
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            borderRadius: 6,
+            borderRadius: 10,
             backgroundColor: isLight ? alpha('#fff', 0.9) : alpha('#fff', 0.04),
             '& fieldset': { borderColor: divider },
             '&:hover fieldset': { borderColor: isLight ? 'rgba(15, 23, 42, 0.18)' : 'rgba(232, 238, 252, 0.2)' },
@@ -276,7 +277,7 @@ export function buildTheme(
             fontWeight: 400,
             height: 22,
             fontSize: 12,
-            borderRadius: 6,
+            borderRadius: 10,
           },
           sizeSmall: {
             height: 20,
@@ -326,7 +327,7 @@ export function buildTheme(
           root: {
             textTransform: 'none',
             fontWeight: 600,
-            borderRadius: 6,
+            borderRadius: 7,
             borderColor: divider,
             color: textSecondary,
             '&.Mui-selected': {

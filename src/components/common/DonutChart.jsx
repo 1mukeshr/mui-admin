@@ -39,6 +39,7 @@ export function DonutChart({
             </Pie>
             <Tooltip
               contentStyle={tooltip}
+              cursor={false}
               formatter={(value, name) => [formatter ? formatter(value, name) : value, name]}
             />
           </PieChart>

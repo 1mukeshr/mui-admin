@@ -40,7 +40,7 @@ export function ProductsList() {
         render: (product) => (
           <Stack direction="row" spacing={1.5} alignItems="center">
             {product.image ? (
-              <img src={product.image} alt={product.name} width={36} height={36} style={{ borderRadius: 6, objectFit: 'cover' }} />
+              <img src={product.image} alt={product.name} width={36} height={36} style={{ borderRadius: 10, objectFit: 'cover' }} />
             ) : (
               <Chip size="small" label={product.name.slice(0, 2)} />
             )}

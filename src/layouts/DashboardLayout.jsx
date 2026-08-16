@@ -1,6 +1,3 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { BrandLogo } from '../components/common/BrandLogo';
 import { ThemeToggle } from '../components/common/ThemeToggle';
@@ -49,13 +46,15 @@ export function DashboardLayout() {
           <div className="l-drawer-desktop">{drawer}</div>
           <button
             type="button"
-            className="l-sidebar-toggle"
+            className={`l-sidebar-toggle${collapsed ? ' is-collapsed' : ''}`}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={() => setMenu(collapsed ? 'vertical' : 'collapsed')}
           >
-            <span className="l-sidebar-toggle__icon" aria-hidden>
-              {collapsed ? <ChevronRightIcon fontSize="inherit" /> : <ChevronLeftIcon fontSize="inherit" />}
+            <span className="l-sidebar-toggle__bars" aria-hidden>
+              <i />
+              <i />
+              <i />
             </span>
           </button>
         </div>
@@ -77,7 +76,11 @@ export function DashboardLayout() {
               onClick={() => setMobileOpen(true)}
               aria-label="Open navigation"
             >
-              <MenuIcon />
+              <span className="l-header__menu-bars" aria-hidden>
+                <i />
+                <i />
+                <i />
+              </span>
             </button>
 
             {horizontal && (

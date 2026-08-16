@@ -2,6 +2,24 @@ export function formatCurrency(value) {
   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
 }
 
+/** Compact axis/tick label for chart values in thousands of rupees. */
+export function formatInrK(value) {
+  return `₹${Math.round(Number(value) / 1000)}k`;
+}
+
+/** Month-over-month style delta for StatCards (`+12.4%` / `-3%`). Pass `invert` when a drop is good (e.g. bounce). */
+export function formatPercentChange(current, previous, { invert = false, digits = 1 } = {}) {
+  if (current == null || previous == null || !Number.isFinite(current) || !Number.isFinite(previous) || previous === 0) {
+    return undefined;
+  }
+  let pct = ((Number(current) - Number(previous)) / Math.abs(Number(previous))) * 100;
+  if (invert) pct = -pct;
+  const factor = 10 ** digits;
+  const rounded = Math.round(pct * factor) / factor;
+  if (Object.is(rounded, -0) || rounded === 0) return '0%';
+  return `${rounded > 0 ? '+' : ''}${rounded}%`;
+}
+
 export function formatDate(value) {
   if (!value) return '—';
   return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(value));

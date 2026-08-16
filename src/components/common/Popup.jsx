@@ -3,7 +3,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const TONE_ICON = {
   info: InfoOutlinedIcon,
@@ -11,6 +11,8 @@ const TONE_ICON = {
   warning: WarningAmberOutlinedIcon,
   danger: ErrorOutlineIcon,
 };
+
+const EXIT_MS = 180;
 
 export function Popup({
   open,
@@ -22,8 +24,24 @@ export function Popup({
   tone,
   dismissible = true,
 }) {
+  const [mounted, setMounted] = useState(open);
+  const [visible, setVisible] = useState(open);
+
   useEffect(() => {
-    if (!open) return undefined;
+    if (open) {
+      setMounted(true);
+      const id = window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => setVisible(true));
+      });
+      return () => window.cancelAnimationFrame(id);
+    }
+    setVisible(false);
+    const timer = window.setTimeout(() => setMounted(false), EXIT_MS);
+    return () => window.clearTimeout(timer);
+  }, [open]);
+
+  useEffect(() => {
+    if (!mounted) return undefined;
     const onKey = (event) => {
       if (event.key === 'Escape' && dismissible) onClose?.();
     };
@@ -34,14 +52,14 @@ export function Popup({
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prev;
     };
-  }, [dismissible, onClose, open]);
+  }, [dismissible, mounted, onClose]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   const Icon = tone ? TONE_ICON[tone] : null;
 
   return (
-    <div className="c-popup" role="presentation">
+    <div className={`c-popup${visible ? ' is-open' : ''}`} role="presentation">
       <button
         type="button"
         className="c-popup__backdrop"

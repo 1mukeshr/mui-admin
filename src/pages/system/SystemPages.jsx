@@ -7,7 +7,7 @@ function StatusScreen({
   code,
   title,
   description,
-  primaryLabel = 'Back to dashboard',
+  primaryLabel = 'Go home',
   onPrimary,
   secondaryLabel = 'Go back',
   onSecondary,
@@ -51,8 +51,9 @@ export function NotFoundPage() {
       imageAlt="Page not found"
       code="404"
       title="Page not found"
-      description="This route is missing or was moved. Check the URL, or head back to the console."
-      onPrimary={() => navigate('/dashboard')}
+      description="This route is missing or was moved. Check the URL, or return home."
+      primaryLabel="Go home"
+      onPrimary={() => navigate('/')}
       onSecondary={() => navigate(-1)}
     />
   );
@@ -67,8 +68,8 @@ export function ForbiddenPage() {
       code="403"
       title="Access denied"
       description="Your role cannot open this page. Ask an admin if you need a different permission."
-      primaryLabel="Open dashboard"
-      onPrimary={() => navigate('/dashboard')}
+      primaryLabel="Go home"
+      onPrimary={() => navigate('/')}
       onSecondary={() => navigate(-1)}
     />
   );
@@ -82,9 +83,9 @@ export function ServerErrorPage() {
       imageAlt="Server error"
       code="500"
       title="Something broke"
-      description="An unexpected error stopped this screen. Retry, or return to the dashboard."
-      primaryLabel="Try dashboard"
-      onPrimary={() => navigate('/dashboard')}
+      description="An unexpected error stopped this screen. Retry, or return home."
+      primaryLabel="Go home"
+      onPrimary={() => navigate('/')}
       secondaryLabel="Reload"
       onSecondary={() => window.location.reload()}
     />

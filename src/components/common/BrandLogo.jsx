@@ -1,20 +1,26 @@
+import { BRAND_FULL, BRAND_NAME, BRAND_PRODUCT } from '../../data/brand';
+
+/** Full Tejas MUI wordmark — always shows both names. */
 export function BrandLogo({
-  inverted = false,
   compact = false,
+  className = '',
+  inverted = false,
 }) {
-  const className = ['c-brand', compact ? 'is-compact' : '', inverted ? 'is-inverted' : ''].filter(Boolean).join(' ');
+  const classes = [
+    'c-brand',
+    compact ? 'is-compact' : '',
+    inverted ? 'is-inverted' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <span className={className} aria-label="MUI Admin">
-      <span className="c-brand__mark" aria-hidden>
-        M
+    <span className={classes} aria-label={BRAND_FULL}>
+      <span className="c-brand__text">
+        <span className="c-brand__tejas">{BRAND_NAME}</span>
+        <span className="c-brand__mui">{BRAND_PRODUCT}</span>
       </span>
-      {!compact && (
-        <span className="c-brand__wordmark">
-          <span className="c-brand__name">MUI</span>
-          <span className="c-brand__name c-brand__name--soft">Admin</span>
-        </span>
-      )}
     </span>
   );
 }

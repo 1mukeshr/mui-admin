@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 import { formatCurrency } from '../../utils/format';
 
 const ITEMS = [
@@ -14,7 +14,7 @@ export function CheckoutPage() {
   const [form, setForm] = useState({
     name: OWNER_NAME,
     phone: CONTACT_PHONE,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     address: 'C-14, Civil Lines',
     city: 'Jaipur',
     pincode: '302006',
@@ -143,7 +143,7 @@ export function CheckoutPage() {
             </button>
             {placed && (
               <button type="button" className="p-site__btn p-site__btn--solid" onClick={() => navigate('/login')}>
-                Go to console
+                Login
               </button>
             )}
           </aside>

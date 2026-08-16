@@ -102,7 +102,7 @@ function LayoutPreview({ variant }) {
   );
 }
 
-export function CustomizerButton() {
+function CustomizerButton() {
   const { user } = useAuth();
   const { customizerOpen, setCustomizerOpen } = useThemeMode();
 

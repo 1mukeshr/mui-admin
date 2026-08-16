@@ -1,6 +1,7 @@
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BRAND_FULL } from '../../data/brand';
 import { FRONT_PLANS, planPriceLabel } from '../../data/front';
 import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
 
@@ -14,7 +15,7 @@ export function PricingPage() {
         <div className="p-site__hero-inner">
           <p className="p-site__kicker">Pricing</p>
           <h1>Simple pricing in ₹</h1>
-          <p className="p-site__lead">Pick a plan for the MUI Admin workspace. Yearly billing saves two months.</p>
+          <p className="p-site__lead">Pick a plan for the {BRAND_FULL} workspace. Yearly billing saves two months.</p>
           <div className="p-site__toggle" role="group" aria-label="Billing cycle">
             <button type="button" className={!yearly ? 'is-active' : undefined} onClick={() => setYearly(false)}>
               Monthly

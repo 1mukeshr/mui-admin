@@ -46,6 +46,7 @@ import { TabsPage } from './pages/tabs/TabsPage';
 import { ChatPage } from './pages/chat/ChatPage';
 import { IconsPage } from './pages/icons/IconsPage';
 import { PopupsPage } from './pages/popups/PopupsPage';
+import { ComponentsPage } from './pages/components/ComponentsPage';
 import {
   ForbiddenPage,
   NotFoundPage,
@@ -155,12 +156,14 @@ export default function App() {
           <Route path="/tables/basic" element={<BasicTables />} />
           <Route path="/tables/data" element={<Navigate to="/tables/data/basic" replace />} />
           <Route path="/tables/data/:type" element={<DataTablesDemo />} />
-          <Route path="/pages/faq" element={<Navigate to="/pages/faq/accordion" replace />} />
+          <Route path="/pages/faq" element={<Navigate to="/pages/faq/basic" replace />} />
           <Route path="/pages/faq/:type" element={<FaqPage />} />
           <Route path="/pages/tabs" element={<Navigate to="/pages/tabs/basic" replace />} />
           <Route path="/pages/tabs/:type" element={<TabsPage />} />
           <Route path="/pages/icons" element={<Navigate to="/pages/icons/gallery" replace />} />
           <Route path="/pages/icons/:type" element={<IconsPage />} />
+          <Route path="/pages/components" element={<Navigate to="/pages/components/buttons" replace />} />
+          <Route path="/pages/components/:type" element={<ComponentsPage />} />
           <Route path="/pages/popups" element={<PopupsPage />} />
           <Route path="/apps/chat" element={<ChatPage />} />
 

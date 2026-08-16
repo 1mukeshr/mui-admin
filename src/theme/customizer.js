@@ -1,5 +1,5 @@
 import { darken, lighten } from '@mui/material/styles';
-import { COLOR_PRESETS, DEFAULT_COLOR_ID, getColorPreset } from './presets';
+import { DEFAULT_COLOR_ID, getColorPreset } from './presets';
 
 export const DEFAULT_CUSTOMIZER = {
   preference: 'light',
@@ -31,5 +31,3 @@ export function resolveColorPreset(colorId, customColor) {
 export function isCustomizerDirty(state) {
   return Object.keys(DEFAULT_CUSTOMIZER).some((key) => state[key] !== DEFAULT_CUSTOMIZER[key]);
 }
-
-export { COLOR_PRESETS, DEFAULT_COLOR_ID };

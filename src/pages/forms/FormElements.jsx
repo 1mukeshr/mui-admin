@@ -26,7 +26,7 @@ import {
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 import { formatCurrency } from '../../utils/format';
 
 const TABS = [
@@ -42,7 +42,7 @@ export function FormElements() {
   const tab = Math.max(0, TABS.findIndex((item) => item.id === type));
   const [values, setValues] = useState({
     name: OWNER_NAME,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     phone: CONTACT_PHONE,
     city: 'Jaipur',
     role: 'admin',

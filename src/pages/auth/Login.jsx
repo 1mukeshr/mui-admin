@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { OWNER_EMAIL } from '../../data/seed';
 
 const DEMOS = [
-  { label: 'Super Admin', email: 'admin@demo.com', password: 'Admin@123' },
+  { label: 'Super Admin', email: OWNER_EMAIL, password: 'Admin@123' },
   { label: 'Admin', email: 'priya@demo.com', password: 'Admin@123' },
   { label: 'Viewer', email: 'viewer@demo.com', password: 'Viewer@123' },
 ];
@@ -13,7 +14,7 @@ export function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from ?? '/dashboard';
-  const [email, setEmail] = useState('admin@demo.com');
+  const [email, setEmail] = useState(OWNER_EMAIL);
   const [password, setPassword] = useState('Admin@123');
   const [error, setError] = useState('');
   const [remember, setRemember] = useState(true);

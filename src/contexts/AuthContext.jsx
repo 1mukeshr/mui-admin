@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { DEFAULT_ROLES } from '../data/permissions';
-import { CONTACT_PHONE, OWNER_NAME, SEED_USERS } from '../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME, SEED_USERS } from '../data/seed';
 import { loadState, removeState, saveState } from '../utils/storage';
 import { uid } from '../utils/format';
 
@@ -12,6 +12,11 @@ const REMOVED_DEMO_EMAILS = new Set([
   'riley@demo.com',
   'casey@demo.com',
 ]);
+const LEGACY_OWNER_EMAILS = new Set(['admin@demo.com', OWNER_EMAIL.toLowerCase()]);
+
+function isOwnerAccount(item) {
+  return item?.id === 'u1' || LEGACY_OWNER_EMAILS.has(String(item?.email || '').toLowerCase()) || item?.name === 'Alex Morgan';
+}
 
 function normalizeRole(role) {
   return OBSOLETE_ROLES.has(role) ? 'viewer' : role;
@@ -36,10 +41,27 @@ function loadUsers() {
       ...item,
       role: normalizeRole(item.role),
       phone: CONTACT_PHONE,
-      name: item.id === 'u1' || item.email === 'admin@demo.com' || item.name === 'Alex Morgan' ? OWNER_NAME : item.name,
+      ...(isOwnerAccount(item)
+        ? { id: 'u1', name: OWNER_NAME, email: OWNER_EMAIL }
+        : {}),
     }));
 
   const merged = [...stored];
+  // Drop legacy owner email duplicates after migration
+  const ownerIndex = merged.findIndex((item) => isOwnerAccount(item));
+  if (ownerIndex !== -1) {
+    merged[ownerIndex] = {
+      ...merged[ownerIndex],
+      id: 'u1',
+      name: OWNER_NAME,
+      email: OWNER_EMAIL,
+      phone: CONTACT_PHONE,
+    };
+    for (let i = merged.length - 1; i >= 0; i -= 1) {
+      if (i !== ownerIndex && isOwnerAccount(merged[i])) merged.splice(i, 1);
+    }
+  }
+
   SEED_USERS.forEach((seed) => {
     const index = merged.findIndex((item) => item.email.toLowerCase() === seed.email.toLowerCase());
     if (index === -1) merged.push(seed);
@@ -68,7 +90,7 @@ function loadSession() {
     ...session,
     role: normalizeRole(session.role),
     phone: CONTACT_PHONE,
-    name: session.id === 'u1' || session.email === 'admin@demo.com' || session.name === 'Alex Morgan' ? OWNER_NAME : session.name,
+    ...(isOwnerAccount(session) ? { id: 'u1', name: OWNER_NAME, email: OWNER_EMAIL } : {}),
   };
   saveState('session', next);
   return next;

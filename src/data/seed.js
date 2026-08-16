@@ -1,11 +1,12 @@
 export const CONTACT_PHONE = '9690421423';
 export const OWNER_NAME = 'Mukesh Rawat';
+export const OWNER_EMAIL = 'mukes19rawat96@gmail.com';
 
 export const SEED_USERS = [
   {
     id: 'u1',
     name: OWNER_NAME,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     password: 'Admin@123',
     role: 'super_admin',
     status: 'active',

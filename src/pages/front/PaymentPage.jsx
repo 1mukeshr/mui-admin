@@ -2,7 +2,7 @@ import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FRONT_PLANS, planPriceLabel } from '../../data/front';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 
 export function PaymentPage() {
   const [params] = useSearchParams();
@@ -12,7 +12,7 @@ export function PaymentPage() {
   const [paid, setPaid] = useState(false);
   const [form, setForm] = useState({
     name: OWNER_NAME,
-    email: 'admin@demo.com',
+    email: OWNER_EMAIL,
     phone: CONTACT_PHONE,
     card: '4242 4242 4242 4242',
     expiry: '08/28',
@@ -39,7 +39,7 @@ export function PaymentPage() {
           <article className="p-site__panel">
             {paid && (
               <div className="p-site__alert" role="status">
-                Payment recorded in this browser. Open the console to continue.
+                Payment recorded in this browser. Login to continue in the app.
               </div>
             )}
 
@@ -183,7 +183,7 @@ export function PaymentPage() {
             </button>
             {paid && (
               <button type="button" className="p-site__btn p-site__btn--solid" onClick={() => navigate('/login')}>
-                Go to console
+                Login
               </button>
             )}
           </aside>

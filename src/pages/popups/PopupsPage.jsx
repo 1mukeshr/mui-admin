@@ -10,12 +10,13 @@ import { PageHeader } from '../../components/common/PageHeader';
 import { Popup, ToastStack } from '../../components/common/Popup';
 import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
 
-const DEMO_CARDS = [
+const DIALOGS = [
   {
     id: 'alert',
     title: 'Alert',
     body: 'One-action notice for tips and non-blocking messages.',
     tone: 'info',
+    size: 'sm',
     Icon: InfoOutlinedIcon,
   },
   {
@@ -23,6 +24,7 @@ const DEMO_CARDS = [
     title: 'Confirm',
     body: 'Ask before a destructive or irreversible change.',
     tone: 'danger',
+    size: 'sm',
     Icon: ErrorOutlineIcon,
   },
   {
@@ -30,6 +32,7 @@ const DEMO_CARDS = [
     title: 'Success',
     body: 'Confirm a save, invite, or payment finished cleanly.',
     tone: 'success',
+    size: 'sm',
     Icon: CheckCircleOutlineIcon,
   },
   {
@@ -37,6 +40,7 @@ const DEMO_CARDS = [
     title: 'Warning',
     body: 'Flag risk before stock, billing, or role changes.',
     tone: 'warning',
+    size: 'md',
     Icon: WarningAmberOutlinedIcon,
   },
   {
@@ -44,6 +48,7 @@ const DEMO_CARDS = [
     title: 'Form',
     body: 'Collect a short input set without leaving the page.',
     tone: 'info',
+    size: 'md',
     Icon: EditOutlinedIcon,
   },
   {
@@ -51,8 +56,12 @@ const DEMO_CARDS = [
     title: 'Large',
     body: 'Wider panel for detail, previews, or longer copy.',
     tone: 'info',
+    size: 'lg',
     Icon: OpenInFullOutlinedIcon,
   },
+];
+
+const TOASTS = [
   {
     id: 'toast-info',
     title: 'Toast info',
@@ -75,6 +84,24 @@ const DEMO_CARDS = [
     Icon: ErrorOutlineIcon,
   },
 ];
+
+function DemoTile({ card, onLaunch }) {
+  return (
+    <article className={`p-popups__tile is-${card.tone}`}>
+      <div className="p-popups__tile-top">
+        <span className="p-popups__icon" aria-hidden>
+          <card.Icon fontSize="small" />
+        </span>
+        {card.size && <em className="p-popups__size">{card.size}</em>}
+      </div>
+      <h2>{card.title}</h2>
+      <p>{card.body}</p>
+      <button type="button" className="p-popups__launch" onClick={() => onLaunch(card.id)}>
+        Preview
+      </button>
+    </article>
+  );
+}
 
 export function PopupsPage() {
   const [open, setOpen] = useState(null);
@@ -116,30 +143,38 @@ export function PopupsPage() {
     <div className="c-page p-popups">
       <PageHeader title="Popups" crumbs={[{ label: 'UI Kit' }, { label: 'Popups' }]} />
 
-      <p className="p-popups__intro">Nine popup patterns in three rows — dialogs, forms, and toasts.</p>
+      <section className="p-popups__section">
+        <header className="p-popups__section-head">
+          <h2>Dialogs</h2>
+        </header>
+        <ul className="p-popups__grid">
+          {DIALOGS.map((card) => (
+            <li key={card.id}>
+              <DemoTile card={card} onLaunch={launch} />
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <ul className="p-popups__grid">
-        {DEMO_CARDS.map((card) => (
-          <li key={card.id}>
-            <article className={`p-popups__tile is-${card.tone}`}>
-              <span className="p-popups__icon" aria-hidden>
-                <card.Icon fontSize="small" />
-              </span>
-              <h2>{card.title}</h2>
-              <p>{card.body}</p>
-              <button type="button" className="p-popups__launch" onClick={() => launch(card.id)}>
-                Preview
-              </button>
-            </article>
-          </li>
-        ))}
-      </ul>
+      <section className="p-popups__section">
+        <header className="p-popups__section-head">
+          <h2>Toasts</h2>
+        </header>
+        <ul className="p-popups__grid p-popups__grid--toasts">
+          {TOASTS.map((card) => (
+            <li key={card.id}>
+              <DemoTile card={card} onLaunch={launch} />
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <Popup
         open={open === 'alert'}
         onClose={close}
         tone="info"
         title="Heads up"
+        size="sm"
         footer={
           <button type="button" className="c-popup__btn c-popup__btn--primary" onClick={close}>
             Got it
@@ -156,6 +191,7 @@ export function PopupsPage() {
         onClose={close}
         tone="danger"
         title="Delete this order?"
+        size="sm"
         footer={
           <>
             <button type="button" className="c-popup__btn c-popup__btn--ghost" onClick={close}>
@@ -182,6 +218,7 @@ export function PopupsPage() {
         onClose={close}
         tone="success"
         title="Invite sent"
+        size="sm"
         footer={
           <button type="button" className="c-popup__btn c-popup__btn--primary" onClick={close}>
             Continue
@@ -196,6 +233,7 @@ export function PopupsPage() {
         onClose={close}
         tone="warning"
         title="Low stock risk"
+        size="md"
         footer={
           <>
             <button type="button" className="c-popup__btn c-popup__btn--ghost" onClick={close}>
@@ -221,7 +259,7 @@ export function PopupsPage() {
         open={open === 'form'}
         onClose={close}
         title="Invite teammate"
-        size="sm"
+        size="md"
         footer={
           <>
             <button type="button" className="c-popup__btn c-popup__btn--ghost" onClick={close}>

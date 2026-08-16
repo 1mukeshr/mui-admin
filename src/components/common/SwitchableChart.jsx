@@ -37,8 +37,16 @@ export function SwitchableChart({
   categoryWidth = 88,
   showLegend,
   showToggle = true,
+  type: typeProp,
+  onTypeChange,
+  fill = false,
 }) {
-  const [type, setType] = useState(defaultType);
+  const [internalType, setInternalType] = useState(defaultType);
+  const type = typeProp ?? internalType;
+  const setType = (next) => {
+    if (typeProp === undefined) setInternalType(next);
+    onTypeChange?.(next);
+  };
   const theme = useTheme();
   const gid = useId().replace(/:/g, '');
   const axis = theme.palette.text.secondary;
@@ -49,9 +57,12 @@ export function SwitchableChart({
   const Chart = type === 'line' ? LineChart : type === 'area' ? AreaChart : BarChart;
   const vertical = layout === 'vertical';
   const tick = { fill: axis, fontSize: 12 };
+  const margin = vertical
+    ? { top: 8, right: 16, left: 4, bottom: legend ? 4 : 0 }
+    : { top: 8, right: hasRight ? 12 : 12, left: 4, bottom: legend ? 4 : 4 };
 
   return (
-    <div className="c-chart">
+    <div className={`c-chart${fill ? ' is-fill' : ''}`}>
       {showToggle && (
         <div className="c-chart-switch">
           <ToggleButtonGroup exclusive size="small" value={type} onChange={(_, next) => next && setType(next)} aria-label="Chart type">
@@ -63,12 +74,12 @@ export function SwitchableChart({
           </ToggleButtonGroup>
         </div>
       )}
-      <div className={`c-chart-canvas c-chart-canvas--${height}`}>
+      <div className={`c-chart-canvas c-chart-canvas--${height}${fill ? ' is-fill' : ''}`}>
         <ResponsiveContainer width="100%" height="100%" debounce={50}>
           <Chart
             data={data}
             layout={vertical ? 'vertical' : undefined}
-            margin={vertical ? { top: 8, right: 16, left: 4, bottom: 0 } : { top: 8, right: hasRight ? 8 : 8, left: 0, bottom: 0 }}
+            margin={margin}
           >
             <defs>
               {series.map((item) => (
@@ -86,7 +97,7 @@ export function SwitchableChart({
               </>
             ) : (
               <>
-                <XAxis dataKey={xKey} stroke={axis} tick={tick} tickLine={false} axisLine={false} />
+                <XAxis dataKey={xKey} stroke={axis} tick={tick} tickLine={false} axisLine={false} tickMargin={8} height={32} interval={0} />
                 <YAxis
                   yAxisId={hasRight ? 'left' : undefined}
                   stroke={axis}
@@ -94,6 +105,7 @@ export function SwitchableChart({
                   tickLine={false}
                   axisLine={false}
                   width={52}
+                  tickMargin={4}
                   tickFormatter={yTickFormatter}
                 />
                 {hasRight ? (
@@ -114,9 +126,9 @@ export function SwitchableChart({
             <Tooltip
               contentStyle={tooltip}
               formatter={formatter}
-              cursor={{ fill: theme.palette.action.hover, stroke: grid }}
+              cursor={false}
             />
-            {legend ? <Legend iconType="circle" wrapperStyle={{ fontSize: 12, paddingTop: 8 }} /> : null}
+            {legend ? <Legend iconType="circle" wrapperStyle={{ fontSize: 12, paddingTop: 4, paddingBottom: 0 }} /> : null}
             {series.map((item) => {
               const axisId = hasRight ? item.yAxisId ?? 'left' : undefined;
               if (type === 'line') {

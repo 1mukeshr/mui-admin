@@ -15,6 +15,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
+import { BRAND_FULL } from '../../data/brand';
 import { CONTACT_PHONE } from '../../data/seed';
 import { formatCurrency } from '../../utils/format';
 
@@ -52,7 +53,7 @@ const PILL_TABS = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 const PANELS = {
   Overview: {
     title: 'Workspace overview',
-    body: `MUI Admin tracks users, catalog, and orders in this browser. Support line is ${CONTACT_PHONE}.`,
+    body: `${BRAND_FULL} tracks users, catalog, and orders in this browser. Support line is ${CONTACT_PHONE}.`,
   },
   Orders: {
     title: 'Recent orders',

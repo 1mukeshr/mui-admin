@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { OWNER_EMAIL } from '../../data/seed';
 
 export function ForgotPassword() {
   const { requestReset } = useAuth();
-  const [email, setEmail] = useState('admin@demo.com');
+  const [email, setEmail] = useState(OWNER_EMAIL);
   const [error, setError] = useState('');
   const [token, setToken] = useState('');
 

@@ -47,12 +47,12 @@ const TONE = {
   award: 'amber',
 };
 
-export function resolveNotificationIcon(item) {
+function resolveNotificationIcon(item) {
   const key = item.icon || item.type || 'default';
   return ICONS[key] || ICONS.default;
 }
 
-export function resolveNotificationTone(item) {
+function resolveNotificationTone(item) {
   const key = item.icon || item.type || 'default';
   return TONE[key] || 'indigo';
 }

@@ -21,6 +21,7 @@
   --header-offset: 64px;
   --font-ui: "Outfit", sans-serif;
   --radius-card: 12px;
+  --radius-btn: 7px;
 }
 
 html[data-menu='collapsed'] {
@@ -114,6 +115,13 @@ a {
 
 img {
   max-width: 100%;
+}
+
+/* Shared action button radius */
+.MuiButton-root,
+.MuiIconButton-root,
+.MuiLoadingButton-root {
+  border-radius: var(--radius-btn) !important;
 }
 
 button,

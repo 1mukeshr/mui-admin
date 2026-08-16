@@ -1,34 +1,24 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
-import { SearchField } from '../../components/common/SearchField';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 
 const TYPES = [
-  { id: 'accordion', label: 'Accordion' },
-  { id: 'categories', label: 'Categories' },
-  { id: 'search', label: 'Search' },
+  { id: 'basic', label: 'Basic' },
+  { id: 'separated', label: 'Separated' },
+  { id: 'filled', label: 'Filled' },
+  { id: 'accent', label: 'Accent' },
 ];
 
 const FAQS = [
   {
     category: 'Account',
     q: 'How do I sign in to the console?',
-    a: 'Use a demo account such as admin@demo.com with password Admin@123, or create a viewer account from Register.',
+    a: `Use the owner account ${OWNER_EMAIL} with password Admin@123, or create a viewer account from Register.`,
   },
   {
     category: 'Account',
@@ -38,7 +28,7 @@ const FAQS = [
   {
     category: 'Billing',
     q: 'What currency does the workspace use?',
-    a: 'All amounts are shown in Indian Rupees (₹). USD and other currencies have been removed.',
+    a: 'All amounts are shown in Indian Rupees (₹). Plans, invoices, and dashboard totals stay in ₹.',
   },
   {
     category: 'Billing',
@@ -48,12 +38,12 @@ const FAQS = [
   {
     category: 'Support',
     q: 'How can I contact the workspace owner?',
-    a: `Contact ${OWNER_NAME} on ${CONTACT_PHONE}. The same number is saved on every user and customer record.`,
+    a: `Contact ${OWNER_NAME} on ${CONTACT_PHONE} or ${OWNER_EMAIL}.`,
   },
   {
     category: 'Support',
     q: 'How do I change theme colors?',
-    a: 'Open Template Customizer from the header tune icon. You can change primary color, light/dark theme, skin, and layout.',
+    a: 'Open Template Customizer from the floating palette control. You can change primary color, light/dark theme, skin, and layout.',
   },
   {
     category: 'Catalog',
@@ -67,111 +57,119 @@ const FAQS = [
   },
 ];
 
-const CATEGORIES = ['Account', 'Billing', 'Support', 'Catalog'];
-
-const accordionSx = {
-  border: 1,
-  borderColor: 'divider',
-  borderRadius: '8px !important',
-  '&:before': { display: 'none' },
-};
+function FaqList({ variant, items, openId, onToggle, IconOpen, IconClosed }) {
+  return (
+    <div className={`p-faq__list p-faq__list--${variant}`}>
+      {items.map((item, index) => {
+        const id = `${variant}-${index}`;
+        const open = openId === id;
+        return (
+          <article key={item.q} className={`p-faq__item ${open ? 'is-open' : ''}`}>
+            <button
+              type="button"
+              className="p-faq__trigger"
+              aria-expanded={open}
+              onClick={() => onToggle(id)}
+            >
+              <span className="p-faq__copy">
+                <span className="p-faq__category">{item.category}</span>
+                <span className="p-faq__question">{item.q}</span>
+              </span>
+              <span className="p-faq__icon" aria-hidden>
+                {open ? <IconOpen fontSize="small" /> : <IconClosed fontSize="small" />}
+              </span>
+            </button>
+            {open && <p className="p-faq__answer">{item.a}</p>}
+          </article>
+        );
+      })}
+    </div>
+  );
+}
 
 export function FaqPage() {
   const { type } = useParams();
   const navigate = useNavigate();
-  const tab = Math.max(0, TYPES.findIndex((item) => item.id === type));
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState(0);
+  const active = TYPES.some((item) => item.id === type) ? type : 'basic';
+  const [openId, setOpenId] = useState('basic-0');
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return FAQS.filter((item) => !q || item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q));
-  }, [query]);
+  const meta = useMemo(() => {
+    switch (active) {
+      case 'separated':
+        return {
+          title: 'Separated accordion',
+          blurb: 'Each question sits in its own card with clear spacing.',
+          IconOpen: ExpandMoreRoundedIcon,
+          IconClosed: ExpandMoreRoundedIcon,
+        };
+      case 'filled':
+        return {
+          title: 'Filled accordion',
+          blurb: 'Soft surface fill keeps the list calm and readable.',
+          IconOpen: KeyboardArrowDownRoundedIcon,
+          IconClosed: KeyboardArrowDownRoundedIcon,
+        };
+      case 'accent':
+        return {
+          title: 'Accent accordion',
+          blurb: 'Left rail + plus/minus for a sharper ops-console feel.',
+          IconOpen: RemoveRoundedIcon,
+          IconClosed: AddRoundedIcon,
+        };
+      default:
+        return {
+          title: 'Basic accordion',
+          blurb: 'Simple stacked rows with a light divider between items.',
+          IconOpen: ExpandMoreRoundedIcon,
+          IconClosed: ExpandMoreRoundedIcon,
+        };
+    }
+  }, [active]);
+
+  const onToggle = (id) => {
+    setOpenId((current) => (current === id ? '' : id));
+  };
 
   return (
-    <>
+    <section className="c-page p-faq">
       <PageHeader
         title="FAQ"
-        crumbs={[{ label: 'Pages' }, { label: 'FAQ' }, { label: TYPES[tab].label }]}
+        crumbs={[{ label: 'Pages' }, { label: 'FAQ' }, { label: TYPES.find((item) => item.id === active)?.label }]}
       />
-      <Card>
-        <Tabs value={tab} onChange={(_, value) => navigate(`/pages/faq/${TYPES[value].id}`)} variant="scrollable" scrollButtons="auto" aria-label="FAQ layouts">
-          {TYPES.map((item) => (
-            <Tab key={item.id} label={item.label} />
-          ))}
-        </Tabs>
-        <CardContent>
-          {tab === 0 && (
-            <Stack spacing={1}>
-              {FAQS.map((item) => (
-                <Accordion key={item.q} disableGutters sx={accordionSx}>
-                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography component="h2" fontWeight={700}>{item.q}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography color="text.secondary">{item.a}</Typography>
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </Stack>
-          )}
 
-          {tab === 1 && (
-            <>
-              <Tabs value={category} onChange={(_, value) => setCategory(value)} variant="scrollable" sx={{ mb: 2 }} aria-label="FAQ categories">
-                {CATEGORIES.map((label) => (
-                  <Tab key={label} label={label} />
-                ))}
-              </Tabs>
-              <Stack spacing={1}>
-                {FAQS.filter((item) => item.category === CATEGORIES[category]).map((item) => (
-                  <Accordion key={item.q} defaultExpanded disableGutters sx={accordionSx}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                      <Typography component="h2" fontWeight={700}>{item.q}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography color="text.secondary">{item.a}</Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </Stack>
-            </>
-          )}
+      <div className="p-faq__tabs" role="tablist" aria-label="FAQ accordion styles">
+        {TYPES.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            role="tab"
+            aria-selected={active === item.id}
+            className={`p-faq__tab ${active === item.id ? 'is-active' : ''}`}
+            onClick={() => {
+              navigate(`/pages/faq/${item.id}`);
+              setOpenId(`${item.id}-0`);
+            }}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
 
-          {tab === 2 && (
-            <Stack spacing={2}>
-              <SearchField
-                label="Search questions"
-                placeholder="Search questions"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <Grid container spacing={2}>
-                {filtered.map((item) => (
-                  <Grid item xs={12} md={6} key={item.q}>
-                    <Box component="article" sx={{ p: 2, border: 1, borderColor: 'divider', borderRadius: '8px', height: '100%' }}>
-                      <Typography variant="caption" color="primary" fontWeight={700}>
-                        {item.category}
-                      </Typography>
-                      <Typography variant="subtitle1" component="h2" sx={{ mt: 0.5, mb: 1 }}>
-                        {item.q}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {item.a}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-              {filtered.length === 0 && (
-                <Box sx={{ py: 4, textAlign: 'center' }}>
-                  <Typography color="text.secondary">No matching questions.</Typography>
-                </Box>
-              )}
-            </Stack>
-          )}
-        </CardContent>
-      </Card>
-    </>
+      <article className="p-faq__panel">
+        <header className="p-faq__intro">
+          <h2>{meta.title}</h2>
+          <p>{meta.blurb}</p>
+        </header>
+
+        <FaqList
+          variant={active}
+          items={FAQS}
+          openId={openId}
+          onToggle={onToggle}
+          IconOpen={meta.IconOpen}
+          IconClosed={meta.IconClosed}
+        />
+      </article>
+    </section>
   );
 }

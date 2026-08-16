@@ -1,6 +1,6 @@
-# MUI Admin
+# Tejas MUI
 
-MUI-based operations console for users, catalog, orders, and reports — built as a portfolio-ready React admin template. Data stays in the browser (`localStorage`); no backend required for the demo.
+Tejas MUI is a Material UI operations console for users, catalog, orders, and reports — built as a portfolio-ready React admin template. Data stays in the browser (`localStorage`); no backend required for the demo.
 
 **Author:** Mukesh Rawat · showcase / interview project
 

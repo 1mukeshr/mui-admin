@@ -8,7 +8,8 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SearchField } from '../../components/common/SearchField';
-import { CONTACT_PHONE, OWNER_NAME } from '../../data/seed';
+import { BRAND_FULL } from '../../data/brand';
+import { CONTACT_PHONE, OWNER_EMAIL, OWNER_NAME } from '../../data/seed';
 
 const TOPICS = [
   { title: 'Getting started', body: 'Sign in with a demo account and open the overview dashboard.', Icon: QuizOutlinedIcon, to: '/' },
@@ -21,7 +22,7 @@ const FAQS = [
   { q: 'Where does demo data live?', a: 'Everything stays in this browser. Clearing site data resets the workspace.' },
   { q: 'How do I change roles?', a: 'Sign in as Super Admin, then open Access → Roles to edit permissions.' },
   { q: 'Can I export reports?', a: 'Yes. Open Reports and use the CSV or PDF actions on each view.' },
-  { q: 'Who do I call for help?', a: `Reach ${OWNER_NAME} on ${CONTACT_PHONE} or email admin@demo.com.` },
+  { q: 'Who do I call for help?', a: `Reach ${OWNER_NAME} on ${CONTACT_PHONE} or email ${OWNER_EMAIL}.` },
 ];
 
 export function HelpPage() {
@@ -40,7 +41,7 @@ export function HelpPage() {
           <p className="p-site__kicker">Help</p>
           <h1>Help Center</h1>
           <p className="p-site__lead">
-            Guides for the MUI Admin workspace. For a live question, call {OWNER_NAME} on {CONTACT_PHONE}.
+            Guides for the {BRAND_FULL} workspace. For a live question, call {OWNER_NAME} on {CONTACT_PHONE}.
           </p>
           <div className="p-site__search">
             <SearchField
@@ -104,11 +105,11 @@ export function HelpPage() {
               <CallOutlinedIcon fontSize="small" />
               {CONTACT_PHONE}
             </a>
-            <a className="p-site__contact-row" href="mailto:admin@demo.com">
+            <a className="p-site__contact-row" href={`mailto:${OWNER_EMAIL}`}>
               <MailOutlineIcon fontSize="small" />
-              admin@demo.com
+              {OWNER_EMAIL}
             </a>
-            <button type="button" className="p-site__btn p-site__btn--solid" onClick={() => navigate('/pages/faq/accordion')}>
+            <button type="button" className="p-site__btn p-site__btn--solid" onClick={() => navigate('/pages/faq/basic')}>
               Browse in-app FAQ
             </button>
           </aside>
